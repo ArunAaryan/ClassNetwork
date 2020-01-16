@@ -16,14 +16,18 @@
                         <input type="checkbox" aria-label="Checkbox for following text input" name="post_id" value="<%= post._id %>"></div>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><%=post.title%></h5>
-                        <h5 class="card-title" style="color:black">
-                            <%=post.tname%>
+                        <h5 class="card-title " style="font-size: 30px;font-weight:100;float:"><%=post.title%></h5>
+                        <div >
+                        <h5 class="card-title" style="color:black;float:inline-start">
+                            <%=post.name%>
                         </h5>
-                        <p class="card-title" style="color:black">
-                            <%=post.Date%>
+                        <p class="card-title" style="color:black;font-weight: 10; font-size: 12px;float:inline-end">
+                            <% pd = post.Date%>
+                            
+                            <%=pd.getDate()+'-'+pd.getMonth()+1+'('+pd.getHours()+':'+pd.getMinutes()+')'%>
                         </p>
-                        <p class="card-text"><%=post.post%></h4>
+                    </div>
+                        <p class="card-text "style="font-size:22px;><%=post.post%>
 
 
                     </div>
