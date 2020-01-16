@@ -1,37 +1,40 @@
 <!-- <h1 class="mt-4">Student Dashboard</h1> -->
 <!-- This is for teachers to view their posts   -->
-<div class="container">
-    <form action = "/teacher/posts/delete" method = "post">
-<% if(posts.length===0){ %>
-    <h1>There is no Posts here!</h1>
-<% } %>
+<%- include('tnavlayout') -%>
+    <div class="container"> <form action="/teacher/posts/delete" method="post">
+        <% if(posts.length===0){ %>
+            <br/>
+            <h1>There is no Posts here!</h1>
+        <% } %>
 
-<% posts.forEach(function(post){ %>
-    <% var postcolor = post.postcolor %> 
-    
-    <div class="card <%= postcolor%>" style="width: 30rem;">
-        <div class="badge badge-primary">
-            <div class="input-group-prepend mb-1">
-              <input type="checkbox" aria-label="Checkbox for following text input" name = "post_title" value="<%= post.title %>">
-            </div>
-          </div>
-        <div class="card-body">   
-            <h5 class="card-title"><%=post.title%></h5>
-            <h5 class="card-title" style ="color:black"> <%=post.tname%> </h5>
-            <p class="card-title" style ="color:black"> <%=post.Date%> </p>
-            <p class="card-text" ><%=post.post%></h4>
-    
-    
-    
-    
-        </div>
-       
-</div>
-<br/>
-<br/>
-<% }) %>
-<button type="submit" class="btn btn-dark">Delete</button>
-    </form>
-</div>
+        <% posts.forEach(function(post){ %>
+            <% var postcolor = post.postcolor %>
 
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+            <div class="card <%= postcolor%>" style="max-width: 25rem;">
+                <div class="badge badge-primary">
+                    <div class="input-group-prepend mb-1">
+                        <input type="checkbox" aria-label="Checkbox for following text input" name="post_id" value="<%= post._id %>"></div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%=post.title%></h5>
+                        <h5 class="card-title" style="color:black">
+                            <%=post.tname%>
+                        </h5>
+                        <p class="card-title" style="color:black">
+                            <%=post.Date%>
+                        </p>
+                        <p class="card-text"><%=post.post%></h4>
+
+
+                    </div>
+
+                </div>
+                <br/>
+                <br/>
+            <% }) %>
+            <% if(posts.length>0){ %>
+                <button class="btn btn-dark" type="submit">Delete</button>
+            <% } %>
+
+        </form>
+    </div>

@@ -9,12 +9,12 @@ router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
 router.get('/dashboard', ensureAuthenticated, (req, res) =>{
   
 
-  if(req.user.isTeacher){
+  if(req.user.currentuser==="teacher"){
     res.render('teachersdashboard',{
     user:req.user
   })
 }
-  else{
+  else if(req.user.currentuser==="student"){
     
     (function(){
       console.log(req.user.name)
@@ -31,7 +31,12 @@ router.get('/dashboard', ensureAuthenticated, (req, res) =>{
   
 
   }
+  else{
+    res.render('admin')
+  }
 });
+
+
 
 
 module.exports = router;

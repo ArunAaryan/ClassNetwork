@@ -9,7 +9,7 @@
 
 <% postdata.forEach(function(post){ %>
     <% var postcolor = post.postcolor %> 
-    <div class="card <%= postcolor%>" style="width: 30rem;">
+    <div class="card <%= postcolor%>" style="max-width: 25rem;">
         <div class="card-body">   
             <h5 class="card-title"><%=post.title%></h5>
             <h5 class="card-title" style ="color:black"> <%=post.name%> </h5>
