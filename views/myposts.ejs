@@ -1,7 +1,9 @@
 <!-- <h1 class="mt-4">Student Dashboard</h1> -->
 <!-- This is for teachers to view their posts   -->
 <%- include('tnavlayout') -%>
-    <div class="container"> <form action="/teacher/posts/delete" method="post">
+<br/>
+    <div class="container"> 
+        <form action="/teacher/posts/delete" method="post">
         <% if(posts.length===0){ %>
             <br/>
             <h1>There is no Posts here!</h1>
@@ -16,7 +18,7 @@
                         <input type="checkbox" aria-label="Checkbox for following text input" name="post_id" value="<%= post._id %>"></div>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title " style="font-size: 30px;font-weight:100;float:"><%=post.title%></h5>
+                        <h5 class="card-title " style="font-size: 30px;font-weight:100;"><%=post.title%></h5>
                         <div >
                         <h5 class="card-title" style="color:black;float:inline-start">
                             <%=post.name%>
@@ -27,12 +29,12 @@
                             <%=pd.getDate()+'-'+pd.getMonth()+1+'('+pd.getHours()+':'+pd.getMinutes()+')'%>
                         </p>
                     </div>
-                        <p class="card-text "style="font-size:22px;><%=post.post%>
+                        <p class="card-text "style="font-size:22px;""><%=post.post%></p>
 
 
                     </div>
 
-                </div>
+                    </div>
                 <br/>
                 <br/>
             <% }) %>
