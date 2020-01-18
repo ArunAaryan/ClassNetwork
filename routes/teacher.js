@@ -1,6 +1,8 @@
 const express = require('express')
 const mongodb = require('mongoose')
 const ObjectId = require('mongodb').ObjectID;
+
+const Feedback = require('../models/Feedback');
 const Posts = require('../models/Posts');
 const router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
@@ -86,6 +88,27 @@ router.post('/posts/delete',ensureAuthenticated,(req,res)=>{
   }
        });
       
+
+router.get('/getfeedback',ensureAuthenticated,(req,res)=>{
+Feedback.find({teacherid:req.user._id},null,{sort:{_id:-1}},(err,feedbacknotes)=>{
+  if(err){
+    console.log(err);
+    return
+  }
+  console.log(feedbacknotes)
+  // console.log('user name is '+feedbacknotes[0].username)
+  // console.log(req.user._id)
+  // console.log(req.user.name)
+  if(feedbacknotes){
+    // console.log(feedbacknotes.username)
+    res.render('showfeedbackt',{
+    feedbacknotes:feedbacknotes
+    })
+  }
+})
+
+})//.get
+
 
 module.exports = router;
       

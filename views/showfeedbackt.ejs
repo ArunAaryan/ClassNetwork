@@ -1,0 +1,36 @@
+<%- include('tnavlayout') -%>
+<br/>
+
+<% if(!feedbacknotes){ %>
+    <h1 class = "display-3"> No Feedback</h1> 
+    <% }else { %>
+
+
+
+
+    <div class="container"style="min-width:23px;max-width: 60rem;">
+        <% include ./partials/messages %>
+
+    <% var username=false %>
+
+
+    <% for(i=0;i<feedbacknotes.length;i++){ %>
+    
+    <% if (feedbacknotes[i].titled) { %>
+    <%  username = feedbacknotes[i].username } else{username="Anonymous"}%>
+   
+    <div class="card border-dark mb-3" style="max-width: 60rem;">
+    <div class="card-header"><% if(username) {%>
+    <%= username %><% }else{ %>
+    <%="Anonymous Feedback" %>
+    <% }%>
+    <p><small><%= feedbacknotes[i].Date %></small></p>
+    </div>
+    <div class="card-body text-dark">
+    <p class="card-text"><%= feedbacknotes[i].feedbacknote %></p>
+    </div>
+    </div>
+    
+    <% } %>
+</div>
+<% } %>
