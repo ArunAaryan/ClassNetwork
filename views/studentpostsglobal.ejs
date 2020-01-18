@@ -1,0 +1,32 @@
+<!-- <h1 class="mt-4">Student Dashboard</h1> -->
+<%- include('studentnav') -%>
+<div class="container" style="min-width: 24rem;max-width: 60rem;">
+<h1 class="mt-4">Welcome <%= username %>, </h1>
+<h1 class="display-3">Student Dashboard</h1>
+
+<% include ./partials/messages %>
+<% if(postdata.length===0){ %>
+    <h1>There is no Posts here!</h1>
+<% } %>
+
+<% postdata.forEach(function(post){ %>
+    <% var postcolor = post.postcolor %> 
+    <div class=" <%= postcolor%>" style="min-width:23px;max-width: 50rem;">
+        <div class="card-header">
+            
+            <%=post.name%>
+                    <% pd = post.Date%>
+                    
+                    <%=pd.getDate()+'-'+pd.getMonth()+1+'-'+pd.getFullYear()+' ('+pd.getHours()+':'+pd.getMinutes()+')'%>
+        </div>
+            <div class="card-body">
+                <div >
+                    <h5 class="card-title"><%=post.title%></h5>
+                </div>
+                <p class="card-text" ><%=post.post%></p>
+            </div>
+    </div>
+        <br/>
+<% }) %>
+</div>
+<a href="/users/logout" class="btn btn-secondary">Logout</a>

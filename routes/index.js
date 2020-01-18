@@ -15,20 +15,9 @@ router.get('/dashboard', ensureAuthenticated, (req, res) =>{
   })
 }
   else if(req.user.currentuser==="student"){
-    
-    (function(){
-      console.log(req.user.name)
-      Posts.find({},function(err, data){
-        res.render('dashboard',{
-          username:req.user.name,
-          postdata :data
-        })
-
-        console.log(data)
-      })
-    
-   })();
-  
+      res.render('studentdashboard');
+      // console.log(req.user.name)
+     
 
   }
   else{

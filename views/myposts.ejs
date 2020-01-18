@@ -3,7 +3,9 @@
 <%- include('tnavlayout') -%>
 <br/>
     <div class="container"> 
+        
         <form action="/teacher/posts/delete" method="post">
+            <div class="form-check">
         <% if(posts.length===0){ %>
             <br/>
             <h1>There is no Posts here!</h1>
@@ -12,35 +14,30 @@
         <% posts.forEach(function(post){ %>
             <% var postcolor = post.postcolor %>
 
-            <div class="card <%= postcolor%>" style="max-width: 25rem;">
-                <div class="badge badge-primary">
-                    <div class="input-group-prepend mb-1">
-                        <input type="checkbox" aria-label="Checkbox for following text input" name="post_id" value="<%= post._id %>"></div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title " style="font-size: 30px;font-weight:100;"><%=post.title%></h5>
-                        <div >
-                        <h5 class="card-title" style="color:black;float:inline-start">
-                            <%=post.name%>
-                        </h5>
-                        <p class="card-title" style="color:black;font-weight: 10; font-size: 12px;float:inline-end">
+            <div class=" <%= postcolor%>" style="min-width:23px;max-width: 60rem;">
+                <div class="card-header">
+                    <input type="checkbox" aria-label="Checkbox for following text input" name="post_id" 
+                    value="<%= post._id %>" style="float-left;">&nbsp
+                    
+                    <%=post.name%>
                             <% pd = post.Date%>
                             
-                            <%=pd.getDate()+'-'+pd.getMonth()+1+'('+pd.getHours()+':'+pd.getMinutes()+')'%>
-                        </p>
+                            <%=pd.getDate()+'-'+pd.getMonth()+1+'-'+pd.getFullYear()+' ('+pd.getHours()+':'+pd.getMinutes()+')'%>
+                </div>
+                    <div class="card-body">
+                        <div >
+                            <h5 class="card-title"><%=post.title%></h5>
+                        </div>
+                        <p class="card-text" ><%=post.post%></p>
                     </div>
-                        <p class="card-text "style="font-size:22px;""><%=post.post%></p>
-
-
-                    </div>
-
-                    </div>
-                <br/>
+            </div>
                 <br/>
             <% }) %>
             <% if(posts.length>0){ %>
-                <button class="btn btn-dark" type="submit">Delete</button>
+                <button class="btn btn-primary btn-block" type="submit">Delete</button>
+                <br/>
             <% } %>
-
+        </div>
         </form>
+    
     </div>

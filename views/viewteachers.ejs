@@ -3,21 +3,10 @@
 <% include ./partials/messages %>
 <% if(teacher.length>0) {%>
 <div class="container">
+  <p class="h4" style="color:rgb(198, 123, 118)"><strong>Select Users to delete!</strong> </p>
     <br/>
     <form action = "/admin/viewteachers" method = "post">
-    <div class="form-check">
-  <input class="form-check-input" type="radio" name="toggleAction" id="exampleRadios1" value="setTeacher" >
-  <label class="form-check-label" for="exampleRadios1">
-    Appoint Teachers
-  </label>
-</div>
-<br/>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="toggleAction" id="exampleRadios1" value="deleteUser" >
-  <label class="form-check-label" for="exampleRadios1">
-    Delete Users
-  </label>
-</div>
+   
     
         <br/>
     

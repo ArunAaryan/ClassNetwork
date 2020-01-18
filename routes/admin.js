@@ -124,7 +124,7 @@ router.post("/viewstudents", (req, res) => {
       }).catch(err=>console.log(err));
            
     }
-      req.flash('success_msg', 'Updated' +userid.length+'users');
+      req.flash('success_msg', 'Updated '  +userid.length+' users');
       res.redirect('/admin/viewstudents')
     }
     else{

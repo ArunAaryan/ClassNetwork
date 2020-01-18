@@ -34,8 +34,8 @@ router.post('/dashboard',(req, res, next)=>{
 
 router.get('/posts',ensureAuthenticated,(req,res)=>{
   if(req.user.currentuser==="teacher"){
-    console.log(req.user)
-    Posts.find({email:req.user.email},(err,posts)=>{
+    // console.log(req.user)
+    Posts.find({email:req.user.email},null,{sort:{_id:-1}},(err,posts)=>{
       if(err){
         console.log(err);
         return
@@ -43,15 +43,19 @@ router.get('/posts',ensureAuthenticated,(req,res)=>{
       if(posts){
         res.render("myposts",{
           posts:posts
-        })
-      }
-    })
-  }
+ 
+      })
+    }
+      // console.log(data)
+
   else{
     res.send('!unauthorized!')
   }
+})
   
-});
+  }
+})
+  
 
 router.post('/posts/delete',ensureAuthenticated,(req,res)=>{
   // console.log(req.body)
@@ -72,8 +76,7 @@ router.post('/posts/delete',ensureAuthenticated,(req,res)=>{
     }).catch(err=>console.log(err));
          
   }
-  req.flash('success_msg', 'Deleted ' +posts.length+' Posts');
-           
+          req.flash('success_msg', 'Deleted ' +posts.length+' Posts');
           res.redirect('/dashboard');
   }//if
     
