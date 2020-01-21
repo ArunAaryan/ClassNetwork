@@ -5,6 +5,10 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const Feedback = require('../models/Feedback')
 const Posts = require('../models/Posts')
 const User = require('../models/User')
+
+//onclick handlers
+
+
 router.get('/posts',(req,res)=>{
     // console.log(req.body)
     if(req.user.currentuser==="student"){
@@ -21,6 +25,18 @@ router.get('/posts',(req,res)=>{
           )
     }
 })//
+
+router.get('/course',(req,res)=>{
+  console.log(req.query)
+  if(req.user.currentuser==="student"){
+    if(req.query.coursename){
+      res.render('course')
+    }
+    else if(req.query.options){
+      res.render('assignments')
+    }
+  }//if
+})//post
 
 router.get('/feedback',ensureAuthenticated,(req,res)=>{
   let teacherlist=""

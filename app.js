@@ -64,7 +64,7 @@ app.use('/users', require('./routes/users.js'));
 app.use('/teacher',require('./routes/teacher.js'))
 app.use('/admin',require('./routes/admin.js'));
 app.use('/student',require('./routes/student.js'));
-
+app.use( express.static( "public" ));
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));

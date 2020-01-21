@@ -1,2 +1,68 @@
 <%- include('studentnav') -%>
-<div class="container"><h1 class="display-3">hello this is student dashboard</h1></div>
+
+
+  <form action="/student/course" method="get" id="form1">
+    
+    <input type="hidden" id="hiddenvalue" name="coursename" value="" />
+<div class="container" >
+    <div class="card-deck" >
+        <a id="something" onclick="dataname('ann')">
+        <div class="card" style="max-width: 30rem; ">
+            <img class="card-img-top" src="ann.jpeg" alt="Card image"
+            style:"opacity:0.75;">
+            <div class="card-img-overlay">
+                <h2 class="card-title"style="color:white">Artificial Neural Networks</h2>
+                    <p class="card-text">New assignment given.</p>
+                </div>
+            </div>
+        </a>
+     
+
+        <a id="something" onclick="dataname('spm')">
+        <div class="card" style="max-width: 30rem;">
+            <img class="card-img-top" src="interview.jpg" alt="Card image"
+            style:"opacity:0.75;">
+            <div class="card-img-overlay">
+                <h2 class="card-title"style="color:white">Software Project Management</h2>
+                    <p class="card-text">New assignment given.</p>
+                </div>
+            </div>
+        </a>
+      
+
+        <a id="something" onclick="dataname('dwdm')">
+        <div class="card" style="max-width: 30rem;">
+            <img class="card-img-top" src="dwdm.jpg" alt="Card image"
+            style:"opacity:0.75;">
+            <div class="card-img-overlay">
+                <h2 class="card-title" style="color:white">Data Warehousing & Mining</h2>
+                    <p class="card-text">New assignment given.</p>
+                </div>
+            </div>
+        </a>
+      
+
+        <a id="something" onclick="dataname('ajp')">
+        <div class="card" style="max-width: 30rem; ">
+            <img class="card-img-top" src="pexels.jpeg" alt="Card image"
+            style:"opacity:0.75;">
+            <div class="card-img-overlay">
+                <h2 class="card-title">Advanced Java Programming</h2>
+                    <p class="card-text">New assignment given.</p>
+                </div>
+            </div>
+        </a>
+
+      </div>
+
+<br/>
+    </div>
+    <script>
+        function dataname(name) {
+          document.getElementById("hiddenvalue").value = name;
+          document.getElementById("form1").submit();
+        }
+      </script>
+  </form>
+  
+
