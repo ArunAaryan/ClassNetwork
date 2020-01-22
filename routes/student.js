@@ -26,21 +26,21 @@ router.get('/posts',(req,res)=>{
     }
 })//
 
-// router.get('/course',(req,res)=>{
-//   console.log(req.query)
-//   if(req.user.currentuser==="student"){
-//     if(req.query.coursename){
-//       res.render('course',{
-//         coursename:coursename
-//       })
-//     }
-//     else if(req.query.options){
-//       res.render('assignments',{
-//         options:options
-//       })
-//     }
-//   }//if
-// })//post
+router.get('/course',(req,res)=>{
+  console.log(req.query)
+  if(req.user.currentuser==="student"){
+    if(req.query.coursename){
+      res.render('course',{
+        coursename:coursename
+      })
+    }
+    else if(req.query.options){
+      res.render('assignments',{
+        options:options
+      })
+    }
+  }//if
+})//post
 
 router.get('/feedback',ensureAuthenticated,(req,res)=>{
   let teacherlist=""
