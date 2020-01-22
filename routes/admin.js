@@ -1,11 +1,8 @@
 const express = require("express");
-const passport = require("passport");
-const Posts = require("../models/Posts");
-const Admin = require("../models/Admin");
 const User = require("../models/User");
 const router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
-
+const Event = require("../models/Event");
 router.get("/viewteachers", ensureAuthenticated, (req, res) => {
   if (req.user.currentuser === "admin") {
     User.find(
@@ -153,4 +150,42 @@ router.post("/viewstudents", (req, res) => {
   // console.log(req.body.userid);
   // console.log(typeof req.body.userid);
 });
+//handle create Event route/admin/event/create
+router.get('/events',(req,res)=>{
+  Event.find({StartDate:{$gt:new Date(Date.now())}},null,{sort:{StartDate:1}},(err,ev)=>{
+    if(err) throw err;
+    else(console.log(ev))
+  })
+  if(req.user.currentuser==="admin"){
+    res.render('createevent');
+  }
+  else{
+    res.send(!unauthorized);
+  }
+})
+router.post('/events',(req,res)=>{
+  if(req.user.currentuser==="admin"){
+    console.log(req.body)
+    
+    const newEvent = new Event({
+      Adminid:req.user._id,
+      EventName:req.body.eventname,
+      StartDate:req.body.startdate,
+      EndDate:req.body.enddate,
+      Note:req.body.note
+    });
+    newEvent.save().then(user=>{
+      req.flash('success_msg','Event Added');
+
+      res.redirect('/admin/events')
+    }).catch(err=>console.log(err));
+   
+  
+}
+  else{
+    res.send(!unauthorized);
+  }
+  })
+
+
 module.exports = router;
