@@ -1,6 +1,8 @@
-dbPassword = 'mongodb+srv://every:every123@cluster0-2je18.gcp.mongodb.net/something?retryWrites=true&w=majority';
-// 'mongodb+srv://<username>:<password>@<clustername>.mongodb.net/<collectionname>?retryWrites=true&w=majority';
 
-module.exports = {
-    mongoURI: dbPassword
-};
+// 'mongodb+srv://<username>:<password>@<clustername>.mongodb.net/<collectionname>?retryWrites=true&w=majority';
+if(process.env.NODE_ENV==="production"){
+    module.exports = require("./prod")
+}else{
+    module.exports = require("./devkey")
+}
+
