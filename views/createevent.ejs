@@ -59,3 +59,24 @@
         
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
       </form> </div>
+      <div class="container">
+          Upcoming Events,
+          <% if(events) {%>
+          <div class="list-group">
+            <%for(i=0;i<events.length;i++) {%>
+               <div href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div >
+                
+                    <small class="text-muted"><%=events[i].StartDate %>-<%=events[i].EndDate %></small>-
+                    <h5 class="mb-1"><%= events[i].EventName %> </h5>
+            </div>
+               </div>
+            <% } %>
+            <% } %>
+          </div>
+          
+          
+          
+              
+          
+      </div>

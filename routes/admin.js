@@ -152,16 +152,18 @@ router.post("/viewstudents", (req, res) => {
 });
 //handle create Event route/admin/event/create
 router.get('/events',(req,res)=>{
-  Event.find({StartDate:{$gt:new Date(Date.now())}},null,{sort:{StartDate:1}},(err,ev)=>{
-    if(err) throw err;
-    else(console.log(ev))
-  })
+  
   if(req.user.currentuser==="admin"){
-    res.render('createevent');
-  }
+    Event.find({StartDate:{$gt:new Date(Date.now())}},null,{sort:{StartDate:1}},(err,events)=>{
+      if(err) throw err;
+      else(console.log(events))
+    res.render('createevent',{events:events});
+  })
+}
   else{
     res.send(!unauthorized);
   }
+
 })
 router.post('/events',(req,res)=>{
   if(req.user.currentuser==="admin"){
