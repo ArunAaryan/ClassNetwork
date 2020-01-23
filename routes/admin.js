@@ -151,20 +151,30 @@ router.post("/viewstudents", (req, res) => {
   // console.log(typeof req.body.userid);
 });
 //handle create Event route/admin/event/create
-router.get('/events',(req,res)=>{
-  
+router.get('/events',ensureAuthenticated,(req,res)=>{
+  // console.log(req.query)
   if(req.user.currentuser==="admin"){
-    Event.find({StartDate:{$gt:new Date(Date.now())}},null,{sort:{StartDate:1}},(err,events)=>{
-      if(err) throw err;
-      else(console.log(events))
-    res.render('createevent',{events:events});
+    // console.log(req.query)
+    if(req.query.options==="createevent"){
+    
+    res.render('createevent');
+  
+}//conditional render
+else{
+  Event.find({StartDate:{$gt:new Date(Date.now())}},null,{sort:{StartDate:1}},(err,events)=>{
+    if(err) throw err;
+    // else(console.log(events))
+    // console.log(req.query)
+    res.render('showevents',{events:events})
   })
 }
+  }
   else{
     res.send(!unauthorized);
-  }
-
+  }//user authorization
 })
+
+
 router.post('/events',(req,res)=>{
   if(req.user.currentuser==="admin"){
     console.log(req.body)
@@ -177,7 +187,7 @@ router.post('/events',(req,res)=>{
       Note:req.body.note
     });
     newEvent.save().then(user=>{
-      req.flash('success_msg','Event Added');
+      req.flash('success_msg','Event Created');
 
       res.redirect('/admin/events')
     }).catch(err=>console.log(err));
@@ -188,6 +198,26 @@ router.post('/events',(req,res)=>{
     res.send(!unauthorized);
   }
   })
+
+router.post('/eventsdel',(req,res)=>{
+  if(req.user.currentuser==="admin"){
+    var events=req.body.eventid;
+   
+    if(typeof(req.body.eventid)==="string"){
+      events=[req.body.eventid]
+    }//
+    for (i=0;i<events.length;i++){
+      Event.deleteOne({_id: events[i]}).then(user=>{
+
+      }).catch(err=>console.log(err));
+    }req.flash('success_msg','deleted '+events.length+' events')
+    res.redirect('/admin/events')
+
+  }
+  else{
+    res.send(!unauthorized)
+  }
+})
 
 
 module.exports = router;

@@ -1,0 +1,52 @@
+<%- include('studentnav') -%>
+
+<div class="container">
+  <% include ./partials/messages %>
+<form action="/student/events" method="get" id="form1">
+    <input type="hidden" id="hiddenvalue" name="options" value="permissionstatus" />
+    <div>
+<button type="submit" class="btn btn-light" style="float:right;min-width: 24rem;" >Show Permission Status</button>
+<script>
+    function dataname(input) {
+      document.getElementById("hiddenvalue").value = input;
+      document.getElementById("form1").submit();
+    }
+    
+  </script>
+</form>
+</div>
+<div class="container">
+    
+    <form action ="/student/events" method="post">
+        
+        <%if (events.length>0) {%>
+    <p class="display-4">Upcoming Events,</p>
+        </div>
+    <%}%>
+    <% if(events) {%>
+        <% console.log() %>
+    <div class="list-group">
+      <%for(i=0;i<events.length;i++) {%>
+        
+        <div class="card" style="min-width: 23rem;">
+            <input type="radio" name="eventid" value="<%=events[i]._id%>">
+            <div class="card-body">
+              <h5 class="card-title"><%=events[i].EventName%></h5>
+              
+              <p class="card-subtitle mb-2 text-muted small"><%=events[i].StartDate%> - <%=events[i].EndDate%></p>
+              <p class="card-text"><%=events[i].Note%></p>
+             <input class="form-control" name="note" type="textarea" value="I want to Join the Event: <%= events[i].EventName %> from <%=events[i].StartDate %> - <%= events[i].EndDate %> "
+            </div>
+          </div>
+          <br/>
+         
+      <% } %>
+      <% } %>
+    </div>
+    <%if (events.length>0) {%>
+    <button type="submit" class="btn btn-primary btn-block" >Request Permission</button>
+    <% }else{%>
+        <p class="display-4">No Events</p>
+    <%}%>
+    </form>
+    </div>

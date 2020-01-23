@@ -1,9 +1,8 @@
 const express = require('express')
-const mongodb = require('mongoose')
-const ObjectId = require('mongodb').ObjectID;
 
 const Feedback = require('../models/Feedback');
 const Posts = require('../models/Posts');
+const Permission = require('../models/permission')
 const router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 router.post('/dashboard',(req, res, next)=>{
@@ -95,7 +94,7 @@ Feedback.find({teacherid:req.user._id},null,{sort:{_id:-1}},(err,feedbacknotes)=
     console.log(err);
     return
   }
-  console.log(feedbacknotes)
+  // console.log(feedbacknotes)
   // console.log('user name is '+feedbacknotes[0].username)
   // console.log(req.user._id)
   // console.log(req.user.name)
@@ -108,6 +107,40 @@ Feedback.find({teacherid:req.user._id},null,{sort:{_id:-1}},(err,feedbacknotes)=
 })
 
 })//.get
+
+router.get('/requests',(req,res)=>{
+  Permission.find({status:"pending"},null,{sort:{_id:1}},(err,requests)=>{
+    if(err){ console.log(err)}
+    if(requests){
+      res.render('viewrequests',{requests:requests,len:requests.length})
+    }
+  })
+})
+
+router.post('/requests',(req,res)=>{
+  console.log(req.body)
+  let requests=req.body.requestid
+  if(typeof(requests)==="string"){
+    requests=[requests]
+  }
+  if(req.body.options==="accepted"){
+  for(i=0;i<requests.length;i++){
+  Permission.updateOne({_id: requests[i]},{$set:{status:"accepted"}}).then(user=>{
+  }).catch(err=>console.log(err));
+  req.flash('updated')
+  res.redirect('/teacher/requests')
+  }
+}
+  else if(req.body.options==="rejected") {
+    for(i=0;i<requests.length;i++){
+      Permission.updateOne({_id: requests[i]},{$set:{status:"rejected"}}).then(user=>{
+      }).catch(err=>console.log(err));
+      req.flash('rejected')
+  res.redirect('/teacher/requests')
+  }
+}
+
+})
 
 
 module.exports = router;

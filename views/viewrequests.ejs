@@ -1,0 +1,37 @@
+
+ <%- include('tnavlayout') -%>
+ <br>
+<div class="container">
+    <% if(requests.length>0){ %>
+    <form action="/teacher/requests" method="post">
+        <h5>Check </h5>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="options" id="inlineRadio1" value="accepted">
+            <label class="form-check-label" for="inlineRadio1">Accept</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="options" id="inlineRadio1" value="rejected">
+            <label class="form-check-label" for="inlineRadio1">Reject</label>
+          </div><br><br>
+        <% for(i=0;i<len;i++) {%>
+            <div class="card" style="min-width: 23rem;">
+                <div class="card-body">
+                    <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="requestid"  value="<%=requests[i]._id %>">
+                            <h5 class="card-title"><%=requests[i].studentname%></h5>
+                    </div>
+                    
+                  
+                  <h6 class="card-subtitle mb-2 text-muted">status: <%=requests[i].status%></h6>
+                  <p class="card-text"><%=requests[i].note%> </p>
+                </div>
+              </div>
+              <br>
+              <%} %>
+
+              <button type="submit" >Update</button>     
+            </form>
+              <% }else{%>
+                <h1 class="display-3">No Requests</h1>
+                <% }%>
+</div>

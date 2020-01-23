@@ -14,11 +14,14 @@ const UserSchema = new mongoose.Schema({
    },
    EndDate:{
        type:Date,
+   },
+   Note:{
+       type:String
    }
 })
 
 const Event = mongoose.model('Event',UserSchema);
-// below code is to create Admins
+// below code is to create Events
 
 
 module.exports = Event;

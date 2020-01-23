@@ -5,7 +5,8 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const Feedback = require('../models/Feedback')
 const Posts = require('../models/Posts')
 const User = require('../models/User')
-
+const Event = require('../models/Event')
+const Permission = require('../models/permission')
 //onclick handlers
 
 
@@ -45,7 +46,7 @@ router.get('/course',(req,res)=>{
 router.get('/feedback',ensureAuthenticated,(req,res)=>{
   let teacherlist=""
   if(req.user.currentuser==="student"){
-      User.find({currentuser:"teacher"},{_id:1,name:1},(err,data)=>{
+      User.find({currentuser:"teacher"},{_id:1,name:1},{sort:{name:1}},(err,data)=>{
         if(err) throw err;
         // console.log(data);
         res.render('feedback',{
@@ -95,4 +96,60 @@ router.post('/feedback',ensureAuthenticated,(req,res)=>{
     // res.end()
   }//if
 })//router.post
+
+router.get('/events',(req,res)=>{
+  if(req.user.currentuser==="student"){
+    
+    if(req.query.options==="permissionstatus"){
+      Permission.find({}, (err, docs) => {
+         if(err){
+             console.log(`Error: ` + err)
+         } else{
+           if(docs.length === 0){
+               res.render('permissionstatus',{docs})
+           } else{
+             res.render('permissionstatus',{docs:docs})
+           }
+         }
+      });
+    }
+    else{
+    Event.find({StartDate:{$gt:new Date(Date.now())}},null,{sort:{StartDate:1}},(err,events)=>{
+      if(err) throw err;
+      // else(console.log(events))
+      // console.log(req.query)
+      res.render('events',{events:events})
+    })
+  }
+  }
+  else{
+    res.send('!unauthorized')
+  }
+})
+
+router.post('/events',ensureAuthenticated,(req,res)=>{
+  if(req.user.currentuser==="student"){
+    // console.log(req.body)
+    if(!req.body.eventid){
+      req.flash('error_msg','Select any event')
+        res.redirect('/student/events')
+    }else{
+    const newrequest= new Permission({
+      studentid:req.user._id,
+      studentname:req.user.name,
+      eventid:req.body.eventid,
+      note:req.body.note
+    })
+    newrequest.save().then(user=>{
+    })
+        .catch(err=>console.log(err));
+        req.flash('success_msg','Request sent to Class Teacher')
+        res.redirect('/student/events')
+    console.log(newrequest)
+  }
+  }
+  else{
+    res.send(!unauthorized)
+  }
+})
 module.exports = router;

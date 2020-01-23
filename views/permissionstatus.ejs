@@ -1,0 +1,28 @@
+<%- include('studentnav') -%>
+
+    <% if(docs) {%>
+        <% console.log(docs) %>
+        <div class="container" >
+    <div class="list-group">
+      <%for(i=0;i<docs.length;i++) {%>
+        
+        <div class="card" style="min-width: 23rem;">
+            
+            <div class="card-body">
+                <% if(docs[i].status==="accepted") {%>
+                  <%  var textcolor="text-success"}else if(docs[i].status==="rejected"){%>
+                     <% var textcolor="text-danger"}else{%>
+                        <% var textcolor="text-warning"}%>
+              <h5 class="card-title text-capitalize <%= textcolor %>"><%= docs[i].status %></h5>
+              <p><%= docs[i].note %></p>
+              
+            
+             
+            </div>
+          </div>
+          <br/>
+          <% } %>
+        </div>
+      
+    </div>
+      <% } %>
