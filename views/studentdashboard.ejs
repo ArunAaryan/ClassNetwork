@@ -1,59 +1,72 @@
 <%- include('studentnav') -%>
 
 
-  <form action="/student/course" method="get" id="form1">
-    
-    <input type="hidden" id="hiddenvalue" name="coursename" value="" />
+  
 <div class="container" >
-    <div class="card-deck" >
-        <a id="something" onclick="dataname('ann')">
-        <div class="card" style="max-width: 30rem; ">
-            <img class="card-img-top" src="ann.jpeg" alt="Card image"
-            style:"opacity:0.75;">
-            <div class="card-img-overlay">
-                <h2 class="card-title"style="color:white">Artificial Neural Networks</h2>
-                    <p class="card-text">New assignment given.</p>
-                </div>
-            </div>
-        </a>
+    <form action="/student/course" method="get" id="form1">
+        <input type="hidden" id="hiddenvalue" name="coursename" value="" />
+    <div class="card w-75" style="min-width:23rem;">
+        <div class="card-body">
+          <h5 class="card-title">Artificial Neural Networks</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a onclick="dataname('ann-syllabus')" class="btn btn-outline-dark">View Syllabus</a><br>
+          <a onclick="dataname('ann-assignments')" class="btn btn-outline-dark">View Assignments</a><br>
+          <a onclick="dataname('ann-othercontent')" class="btn btn-outline-dark">Other content</a>
+        </div>
+      </div>
+      </form>
+
+      <form action="/student/course" method="get" id="form1">
+        <input type="hidden" id="hiddenvalue" name="coursename" value="" />
+      <div class="card w-75" style="min-width:23rem;">
+        <div class="card-body">
+          <h5 class="card-title">Computer Networks</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a onclick="dataname('cn-syllabus')" class="btn btn-outline-dark">View Syllabus</a><br>
+          <a onclick="dataname('cn-assignments')" class="btn btn-outline-dark">View Assignments</a><br>
+          <a onclick="dataname('cn-othercontent')" class="btn btn-outline-dark">Other content</a>
+        </div>
+      </div></form>
+
+      <form action="/student/course" method="get" id="form1">
+        <input type="hidden" id="hiddenvalue" name="coursename" value="" />
+      <div class="card w-75" style="min-width:23rem;">
+        <div class="card-body">
+          <h5 class="card-title">Software Project Management</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a onclick="dataname('spm-syllabus')" class="btn btn-outline-dark">View Syllabus</a><br>
+          <a onclick="dataname('spm-assignments')" class="btn btn-outline-dark">View Assignments</a><br>
+          <a onclick="dataname('spm-othercontent')" class="btn btn-outline-dark">Other content</a>
+        </div>
+      </div></form>
+
+      <form action="/student/course" method="get" id="form1">
+        <input type="hidden" id="hiddenvalue" name="coursename" value="" />
+      <div class="card w-75" style="min-width:23rem;">
+        <div class="card-body">
+          <h5 class="card-title">Datawarehousing & Mining</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a onclick="dataname('dwm-syllabus')" class="btn btn-outline-dark">View Syllabus</a><br>
+          <a onclick="dataname('dwm-assignments')" class="btn btn-outline-dark">View Assignments</a><br>
+          <a onclick="dataname('dwm-othercontent')" class="btn btn-outline-dark">Other content</a>
+        </div>
+      </div></form>
+                
+      <form action="/student/course" method="get" id="form1">
+        <input type="hidden" id="hiddenvalue" name="coursename" value="" />
+      <div class="card w-75" style="min-width:23rem;">
+        <div class="card-body">
+          <h5 class="card-title">Advanced Java Programming</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a onclick="dataname('ajp-syllabus')" class="btn btn-outline-dark">View Syllabus</a><br>
+          <a onclick="dataname('ajp-assignments')" class="btn btn-outline-dark">View Assignments</a><br>
+          <a onclick="dataname('ajp-othercontent')" class="btn btn-outline-dark">Other content</a>
+        </div>
+      </div></form>
+                
      
 
-        <a id="something" onclick="dataname('spm')">
-        <div class="card" style="max-width: 30rem;">
-            <img class="card-img-top" src="interview.jpg" alt="Card image"
-            style:"opacity:0.75;">
-            <div class="card-img-overlay">
-                <h2 class="card-title"style="color:white">Software Project Management</h2>
-                    <p class="card-text">New assignment given.</p>
-                </div>
-            </div>
-        </a>
-      
-
-        <a id="something" onclick="dataname('dwdm')">
-        <div class="card" style="max-width: 30rem;">
-            <img class="card-img-top" src="dwdm.jpg" alt="Card image"
-            style:"opacity:0.75;">
-            <div class="card-img-overlay">
-                <h2 class="card-title" style="color:white">Data Warehousing & Mining</h2>
-                    <p class="card-text">New assignment given.</p>
-                </div>
-            </div>
-        </a>
-      
-
-        <a id="something" onclick="dataname('ajp')">
-        <div class="card" style="max-width: 30rem; ">
-            <img class="card-img-top" src="pexels.jpeg" alt="Card image"
-            style:"opacity:0.75;">
-            <div class="card-img-overlay">
-                <h2 class="card-title">Advanced Java Programming</h2>
-                    <p class="card-text">New assignment given.</p>
-                </div>
-            </div>
-        </a>
-
-      </div>
+        
 
 <br/>
     </div>

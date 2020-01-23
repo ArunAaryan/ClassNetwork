@@ -7,6 +7,7 @@ const Posts = require('../models/Posts')
 const User = require('../models/User')
 const Event = require('../models/Event')
 const Permission = require('../models/permission')
+const Course = require('../models/Course')
 //onclick handlers
 
 
@@ -29,19 +30,27 @@ router.get('/posts',(req,res)=>{
 
 router.get('/course',(req,res)=>{
   console.log(req.query)
+
+  let[coursename,option]=(req.query.coursename.split('-'))
+  console.log(coursename,option)
   if(req.user.currentuser==="student"){
-    if(req.query.coursename){
-      res.render('course',{
-        coursename:coursename
+    if(coursename&&option){
+      res.render('content',{
+        coursename:coursename,
+        option:option
       })
     }
-    else if(req.query.options){
-      res.render('assignments',{
-        options:options
-      })
-    }
+    const newcourse = new Course({
+      CourseName:'ann',
+      Syllabus:'',
+      Assignments:'',
+      otherContent:'',
+      teacherid:''
+
+    })
+    newcourse.save();
   }//if
-})//post
+})//get
 
 router.get('/feedback',ensureAuthenticated,(req,res)=>{
   let teacherlist=""
