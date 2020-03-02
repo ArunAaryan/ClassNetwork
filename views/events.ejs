@@ -32,10 +32,14 @@
             <input type="radio" name="eventid" value="<%=events[i]._id%>">
             <div class="card-body">
               <h5 class="card-title"><%=events[i].EventName%></h5>
+              <% pd = events[i].StartDate%>
+              <%startdate = pd.getDate()+'-'+pd.getMonth()+1+'-'+pd.getFullYear()+' ('+pd.getHours()+':'+pd.getMinutes()+') '%>
+              <% ed = events[i].EndDate%>
+              <%enddate = ed.getDate()+'-'+ed.getMonth()+1+'-'+ed.getFullYear()+' ('+ed.getHours()+':'+ed.getMinutes()+') '%>
               
-              <p class="card-subtitle mb-2 text-muted small"><%=events[i].StartDate%> - <%=events[i].EndDate%></p>
+              <p class="card-subtitle mb-2 text-muted small"><%=startdate%> to <%=enddate%></p>
               <p class="card-text"><%=events[i].Note%></p>
-             <input class="form-control" name="note" type="textarea" value="I want to Join the Event: <%= events[i].EventName %> from <%=events[i].StartDate %> - <%= events[i].EndDate %> "
+             <input class="form-control" name="note" type="textarea" value="I want to Join the Event: <%= events[i].EventName %> from <%=startdate %> to <%= enddate %> "
             </div>
           </div>
           <br/>

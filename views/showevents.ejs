@@ -27,8 +27,12 @@
             <input type="checkbox" name="eventid" value="<%=events[i]._id%>">
             <div class="card-body">
               <h5 class="card-title"><%=events[i].EventName%></h5>
-              
-              <p class="card-subtitle mb-2 text-muted small"><%=events[i].StartDate%> - <%=events[i].EndDate%></p>
+              <% pd = events[i].StartDate%>
+              <%startdate = pd.getDate()+'-'+pd.getMonth()+1+'-'+pd.getFullYear()+'('+pd.getHours()+':'+pd.getMinutes()+')'%>
+              <% ed = events[i].EndDate%>
+              <%enddate = ed.getDate()+'-'+ed.getMonth()+1+'-'+ed.getFullYear()+'('+ed.getHours()+':'+ed.getMinutes()+')'%>
+
+              <p class="card-subtitle mb-2 text-muted small"><%=startdate%> - <%=enddate%></p>
               <p class="card-text"><%=events[i].Note%></p>
              
             </div>
@@ -48,5 +52,6 @@
     <br/>
 
 
+    
 
     
