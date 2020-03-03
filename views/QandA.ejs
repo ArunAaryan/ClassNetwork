@@ -1,0 +1,16 @@
+<%- include('studentnav') -%>
+
+<div class="container" style="min-width: 25rem;">
+  <% include ./partials/messages %>
+<form  action = "/student/QandA" method = "GET">
+  <input type = "hidden" name = "option" value ="askquestion">
+  <input type = "submit" name="" id=""  class="btn btn-outline-primary btn-block" value = "Ask Question">
+
+  </form>
+
+<% if (docs.length ===0){ %>
+  <h1> No Questions </h1>
+  <%} else { %>
+    <h1><%=docs.length %></h1>
+    <%} %>
+

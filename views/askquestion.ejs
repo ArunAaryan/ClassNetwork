@@ -1,0 +1,27 @@
+<%- include('studentnav') -%>
+<% include ./partials/messages %>
+<div class="container" style="min-width: 25rem;">
+<form action = "/student/QandA" method ="POST">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+        </div>
+        <input type="text" name = "title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+   </div>
+   <br/>
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Subject</span>
+        </div>
+        <input type="text" name = "subject" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+   
+   
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Question</label>
+        <textarea name = "question" class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+      </div>
+      
+      
+      <input type = "submit" name="" id=""  class="btn btn-primary btn-block" value = "Submit Question">
+    </form>

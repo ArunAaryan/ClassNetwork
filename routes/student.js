@@ -8,6 +8,7 @@ const User = require("../models/User");
 const Event = require("../models/Event");
 const Permission = require("../models/permission");
 const Course = require("../models/Course");
+const QuestionAnswer = require("../models/QandA");
 //onclick handlers
 
 router.get("/posts", (req, res) => {
@@ -155,4 +156,61 @@ router.post("/events", ensureAuthenticated, (req, res) => {
     res.send(!unauthorized);
   }
 });
+
+router.get("/QandA", ensureAuthenticated, (req, res)=>{
+  if(req.user.currentuser==="student"){
+    if(req.query.option==="askquestion"){
+      res.render("askquestion")
+    }
+    else{
+      QuestionAnswer.find({}, null, { sort: { _id: -1 } },(err, docs) => {
+        if (err) {
+          console.log(`Error: ` + err);
+        } 
+        else {
+          // console.log(docs)
+      res.render("QandA",{docs})
+    }
+  })
+
+}
+  }
+  });
+
+router.post("/QandA",ensureAuthenticated, (req,res)=>{
+  if(req.user.currentuser==="student"){
+    console.log(req.body.title.length)
+    console.log(req.body.question.length)
+    if(req.body.title.length<5 || req.body.question.length<10 || !req.body.subject){
+      req.flash("error_msg","Fill all Fields")
+      req.flash("error_msg",'Title should be atleast 5 characters long');
+      req.flash("error_msg",'and Question should be atleast 10 characters long');
+      (res.render('askquestion'))
+    }
+    else{
+      const newQuestion = new QuestionAnswer({
+        studentid: req.user._id,
+        studentname: req.user.name,
+        title:req.body.title,
+        subject:req.body.subject,
+        question:req.body.question,
+      })
+      newQuestion
+        .save()
+        .then(user => {})
+        .catch(err => console.log(err));
+      req.flash("success_msg","Question Submitted")
+      res.render('QandA')
+      console.log(req.body)
+      
+    }
+    
+  }
+  else{
+    res.send("!Unauthorized")
+  }
+}
+);
+
+
 module.exports = router;
